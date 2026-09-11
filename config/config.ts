@@ -30,8 +30,11 @@ const commitHash =
  * @name 使用公共路径
  * @description 部署时的路径，如果部署在非根目录下，需要配置这个变量
  * @doc https://umijs.org/docs/api/config#publicpath
+ * 本地开发用 `/`；GitHub Pages 项目站用 `/planning-sourcing-system/`（CI=true 或显式 PUBLIC_PATH）
  */
-const PUBLIC_PATH: string = '/';
+const PUBLIC_PATH: string =
+  process.env.PUBLIC_PATH ||
+  (process.env.CI === 'true' ? '/planning-sourcing-system/' : '/');
 
 export default defineConfig({
   alias: {
@@ -43,6 +46,12 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
+
+  /**
+   * @name 路由模式
+   * @description hash 模式便于本地刷新与后续 GitHub Pages 部署
+   */
+  history: { type: 'hash' },
 
   publicPath: PUBLIC_PATH,
 
@@ -114,7 +123,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Ant Design Pro',
+  title: 'ZavaShop SCM',
   layout: {
     locale: true,
     ...defaultSettings,
@@ -133,11 +142,9 @@ export default defineConfig({
    * @doc https://umijs.org/docs/max/i18n
    */
   locale: {
-    // default zh-CN
-    default: 'zh-CN',
+    default: 'en-US',
     antd: true,
-    // default true, when it is true, will use `navigator.language` overwrite default
-    baseNavigator: true,
+    baseNavigator: false,
   },
   /**
    * @name antd 插件
@@ -186,8 +193,8 @@ export default defineConfig({
    * @description 配置 <head> 中额外的 script
    */
   headScripts: [
-    // 解决首次加载时白屏的问题
-    { src: join(PUBLIC_PATH, 'scripts/loading.js'), async: true },
+    // 解决首次加载时白屏的问题（Windows 下 path.join 会变成反斜杠，浏览器无法加载）
+    { src: `${PUBLIC_PATH}scripts/loading.js`.replace(/\\/g, '/'), async: true },
   ],
 
   //================ pro 插件配置 =================
@@ -214,16 +221,8 @@ export default defineConfig({
     include: ['src/pages/**/_mock.ts'],
     exclude: ['mock/requestRecord.mock.js'],
   },
-  utoopack: {
-    module: {
-      rules: {
-        '*.md': {
-          loaders: [{ loader: join(__dirname, 'md-raw-loader.cjs') }],
-          as: '*.js',
-        },
-      },
-    },
-  },
+  // 关闭 utoopack：当前 Windows 环境下会报 ready 但 umi.js 404，导致白屏
+  // 回退到 webpack 打包，保证本地可访问
   requestRecord: {},
   exportStatic: {},
   define: {

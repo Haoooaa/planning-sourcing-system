@@ -3,7 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - all-blocks
+      - master
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,17 +17,26 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v4
 
-      - uses: utooland/setup-utoo@e7aa4d726a17f79f68aed736476ea5bd68f8ba52 # v1
-      - run: ut
-      - name: Set COMMIT_HASH
-        run: echo "COMMIT_HASH=${{ github.sha }}" >> $GITHUB_ENV
-      - run: ut build
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        env:
+          CI: 'true'
+          PUBLIC_PATH: /planning-sourcing-system/
+          COMMIT_HASH: ${{ github.sha }}
+        run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: preview.pro.ant.design

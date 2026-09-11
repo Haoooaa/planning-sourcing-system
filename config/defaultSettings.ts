@@ -1,24 +1,52 @@
 import type { ProLayoutProps } from '@ant-design/pro-components';
 
 /**
- * @name
+ * Light content + dark sider for readable contrast.
+ * Avoid realDark (it forces light text onto light cards).
  */
 const Settings: ProLayoutProps & {
   logo?: string;
 } = {
   navTheme: 'light',
   colorPrimary: '#1677ff',
-  layout: 'mix',
+  layout: 'side',
   contentWidth: 'Fluid',
-  fixedHeader: false,
+  fixedHeader: true,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Ant Design Pro',
+  title: 'ZavaShop 运营',
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
   token: {
-    // 参见ts声明，demo 见文档，通过token 修改样式
-    //https://procomponents.ant.design/components/layout#%E9%80%9A%E8%BF%87-token-%E4%BF%AE%E6%94%B9%E6%A0%B7%E5%BC%8F
+    bgLayout: '#eef2f7',
+    header: {
+      colorBgHeader: '#ffffff',
+      colorHeaderTitle: '#0f172a',
+      colorTextMenu: 'rgba(15, 23, 42, 0.72)',
+      colorTextMenuSelected: '#1677ff',
+      colorTextMenuActive: '#1677ff',
+      colorBgMenuItemHover: 'rgba(22, 119, 255, 0.06)',
+      colorBgMenuItemSelected: 'rgba(22, 119, 255, 0.1)',
+      heightLayoutHeader: 56,
+    },
+    sider: {
+      colorMenuBackground: '#0f172a',
+      colorMenuItemDivider: 'rgba(255, 255, 255, 0.08)',
+      colorTextMenu: 'rgba(255, 255, 255, 0.72)',
+      colorTextMenuSelected: '#ffffff',
+      colorTextMenuActive: '#ffffff',
+      colorTextMenuItemHover: '#ffffff',
+      colorBgMenuItemHover: 'rgba(255, 255, 255, 0.08)',
+      colorBgMenuItemSelected: '#1677ff',
+      colorBgCollapsedButton: '#ffffff',
+      colorTextCollapsedButtonHover: '#1677ff',
+      colorTextCollapsedButton: 'rgba(15, 23, 42, 0.45)',
+    },
+    pageContainer: {
+      colorBgPageContainer: 'transparent',
+      paddingBlockPageContainerContent: 20,
+      paddingInlinePageContainerContent: 24,
+    },
   },
 };
 

@@ -1,164 +1,48 @@
-<h1 align="center">Ant Design Pro</h1>
+# ZavaShop Planning & Sourcing
 
-<div align="center">
+供应链运营原型：库存口径、补货分析、采购跟单、履约异常与数据看板。基于 Ant Design Pro，主数据沿用 ZavaShop 英文字段。
 
-An out-of-box UI solution for enterprise applications as a React boilerplate.
+## 在线预览
 
-[![CI](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml)
-[![GitHub release](https://img.shields.io/github/v/release/ant-design/ant-design-pro.svg)](https://github.com/ant-design/ant-design-pro/releases)
-[![Build With Utoo](https://img.shields.io/badge/build%20with-utoo-028fe4.svg)](https://utoo.land)
-[![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg)](https://umijs.org/)
-[![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
-[![Ant Design](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
+https://haoooaa.github.io/planning-sourcing-system/
 
-Language: English | [简体中文](./README.zh-CN.md)
-
-<img width="1718" height="1191" alt="light theme preview" src="https://github.com/user-attachments/assets/74ad0b4a-e086-4955-8edd-9f2cff31aee8" />
-<img width="1718" height="1191" alt="dark theme preview" src="https://github.com/user-attachments/assets/d4bcb7c1-42c7-4c0f-b130-1193a931f9f7" />
-
-</div>
-
-- Preview: https://preview.pro.ant.design
-- Documentation: [docs/cheatsheet.en-US.md](./docs/cheatsheet.en-US.md)
-- ChangeLog: https://github.com/ant-design/ant-design-pro/releases
-- FAQ: [docs/cheatsheet.en-US.md#faq](./docs/cheatsheet.en-US.md#faq)
-- **v6 Released!** — [What's new in v6](https://github.com/ant-design/ant-design-pro/releases/tag/v6.0.0)
-
-## Features
-
-- :bulb: **TypeScript**: A language for application-scale JavaScript
-- :scroll: **Blocks**: Build page with block template
-- :gem: **Neat Design**: Built on [Ant Design 6](https://ant.design/) specification
-- :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React 19/[Umi Max 4](https://umijs.org/)/[antd 6](https://ant.design/)/[utoopack](https://utoo.land)
-- :iphone: **Responsive**: Designed for variable screen sizes
-- :art: **Theming**: Customizable theme with [Tailwind CSS v4](https://tailwindcss.com/) + [antd-style](https://github.com/ant-design/antd-style)
-- :globe_with_meridians: **International**: Built-in i18n solution
-- :gear: **Best Practices**: Solid workflow to make your code healthy
-- :1234: **Mock development**: Easy to use mock development solution
-- :robot: **AI Assistant**: Built-in AI chatbot page powered by [Ant Design X](https://x.ant.design/)
-- :white_check_mark: **UI Test**: Fly safely with unit and e2e tests
-
-## Templates
-
-```
-- Welcome
-- Dashboard
-  - Analysis
-  - Monitor
-  - Workplace
-- Form
-  - Basic Form
-  - Step Form
-  - Advanced Form
-- List
-  - Search List (Articles/Projects/Applications)
-  - Table List
-  - Basic List
-  - Card List
-- Profile
-  - Basic Profile
-  - Advanced Profile
-- Result
-  - Success
-  - Fail
-- Exception
-  - 403
-  - 404
-  - 500
-- Account
-  - Account Center
-  - Account Settings
-- AI Assistant
-- User
-  - Login
-  - Register
-  - Register Result
-```
-
-## Usage
-
-### Get Started
-
-Clone or download this repository to your local machine:
-
-```bash
-git clone --depth=1 https://github.com/ant-design/ant-design-pro.git myapp
-cd myapp
-```
-
-### Installation
+## 本地运行
 
 ```bash
 npm install
-```
-
-### Development
-
-```bash
-# Start development server (full version by default)
 npm start
 ```
 
-### Simplify to Simple Version
+打开 http://localhost:8000/
 
-This project includes all blocks by default. If you need a minimal version, run:
-
-```bash
-npm run simple
-```
-
-This will:
-- Remove extra page directories (dashboard, form, list/*, profile, result, exception, account, etc.)
-- Remove extra mock files
-- Replace routes with simple version
-- Remove extra dependencies from package.json
-
-**Note**: This operation is irreversible and will permanently delete files.
-
-### Build
+## 发布到 GitHub Pages
 
 ```bash
-npm run build
+npm run deploy
 ```
 
-## AI Skills (Claude Code)
+或 push 到 `master` / `main`，由 GitHub Actions 自动构建并发布。
 
-This project ships with two built-in [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills) in `.claude/skills/`:
+项目站 `publicPath` 为 `/planning-sourcing-system/`（`CI=true` 时自动生效）。
 
-| Skill | Trigger | Description |
-|---|---|---|
-| `/pro-upgrade` | "upgrade pro", "update to latest" | Auto-upgrade to the latest Ant Design Pro version. Diffs the latest template, merges framework changes while preserving your business code. |
-| `/antd` | antd-related code or questions | Query antd component APIs, props, tokens, demos; lint for deprecated usage; migrate between versions — all via `@ant-design/cli`. |
+## 功能模块
 
-**Usage in Claude Code:**
+| Menu | Data |
+|------|------|
+| 业务背景 / 今日风险 / 数据看板 | 运营说明与决策队列 |
+| Inventory | `inventory.json` + `skus.json` + `warehouses.json` |
+| Reorder Plan | `available` vs `reorder_point` + async result file |
+| Purchase Orders | `purchase_orders.json` |
+| Customer Orders | `orders.json` |
+| Suppliers | `suppliers.json` |
+| Warehouses | `warehouses.json` |
+| Tasks / Files | local mock job queue |
 
-```bash
-# Upgrade the project to latest Pro version
-/pro-upgrade
+## 文档
 
-# Query antd component info, debug issues, run lint, etc.
-/antd
-```
+见 [docs/README.md](./docs/README.md)
 
-> 💡 If your project was cloned from this repo, these skills are already included — no installation needed. To get the latest skill definitions, pull the updates from the template or run `npx skills add ant-design/ant-design-pro` to refresh them.
+## 来源
 
-## Browsers support
-
-Modern browsers.
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| --- | --- | --- | --- |
-| Edge | last 2 versions | last 2 versions | last 2 versions |
-
-## Contributing
-
-Any type of contribution is welcome, here are some examples of how you may contribute to this project:
-
-- Use Ant Design Pro in your daily work.
-- Submit [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-- Propose [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
-
-<a href="https://openomy.app/github/ant-design/ant-design-pro" target="_blank" style="display: block; width: 100%;" align="center">
-  <img src="https://openomy.app/svg?repo=ant-design/ant-design-pro&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
-</a>
+- UI 框架：[ant-design/ant-design-pro](https://github.com/ant-design/ant-design-pro)
+- 样例数据：[ZavaShop workshop/data](https://github.com/microsoft/Learn-Microsoft-Agent-Framework-with-Foundry-ZavaShop-Supply-Chain-Workshop/tree/main/workshop/data)

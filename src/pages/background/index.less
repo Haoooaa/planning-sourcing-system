@@ -1,0 +1,182 @@
+.bg-page {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.bg-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+
+.bg-hero__title {
+  margin: 12px 0 !important;
+  font-size: 32px !important;
+  line-height: 1.25 !important;
+}
+
+.bg-hero__title span {
+  display: block;
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.bg-hero__desc {
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 520px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.bg-hero__visual {
+  border-radius: 16px;
+  overflow: visible;
+  min-height: 260px;
+}
+
+.bg-wh.is-active {
+  border: 1px solid #91caff !important;
+  box-shadow: 0 8px 18px rgba(22, 119, 255, 0.12);
+}
+
+.bg-section {
+  margin-top: 36px;
+}
+
+.bg-lead {
+  max-width: 640px;
+  font-size: 15px;
+}
+
+.bg-pain {
+  height: 100%;
+  border-radius: 12px !important;
+  background: #fafbfc !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.bg-pain .ant-typography,
+.bg-pain h4 {
+  color: rgba(0, 0, 0, 0.88) !important;
+}
+
+.bg-pain .ant-typography-secondary {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.bg-formula {
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f0f7ff 0%, #f8fbff 100%);
+  border: 1px solid rgba(22, 119, 255, 0.12);
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.bg-formula__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 15px;
+}
+
+.bg-formula__row span {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.bg-formula__row b {
+  font-size: 18px;
+}
+
+.bg-formula__rules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.bg-formula .ant-typography,
+.bg-formula .ant-typography-secondary {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.bg-role,
+.bg-wh {
+  border-radius: 10px !important;
+  background: #fafcff !important;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.bg-role .ant-typography,
+.bg-wh .ant-typography,
+.bg-role .ant-typography-secondary,
+.bg-wh .ant-typography-secondary {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.bg-role strong,
+.bg-wh__name {
+  color: rgba(0, 0, 0, 0.88) !important;
+}
+
+.bg-wh__name {
+  margin: 8px 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  min-height: 34px;
+}
+
+.bg-wh__sup {
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.bg-story {
+  border-radius: 12px !important;
+  background: #fffaf0 !important;
+  border: 1px solid rgba(250, 173, 20, 0.25) !important;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.bg-story .ant-typography,
+.bg-story .ant-typography-secondary,
+.bg-story p {
+  color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.bg-section--end {
+  padding: 20px;
+  border-radius: 12px;
+  background: #f7f9fc;
+  margin-bottom: 16px;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.bg-section--end .ant-typography,
+.bg-section--end .ant-typography-secondary {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+@media (max-width: 900px) {
+  .bg-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .bg-hero__title {
+    font-size: 26px !important;
+  }
+
+  .bg-hero__title span {
+    font-size: 16px;
+  }
+}

@@ -18,3 +18,4 @@ declare module 'mockjs';
 declare const __APP_VERSION__: string;
 declare const __UMI_VERSION__: string;
 declare const __UTOO_VERSION__: string;
+declare const PUBLIC_PATH: string;
