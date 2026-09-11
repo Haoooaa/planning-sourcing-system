@@ -48,6 +48,12 @@ export default defineConfig({
   hash: true,
 
   /**
+   * Avoid esbuild helper name collisions across async chunks (required for CI build).
+   * @doc https://umijs.org/docs/api/config#esbuildminifyiife
+   */
+  esbuildMinifyIIFE: true,
+
+  /**
    * @name 路由模式
    * @description hash 模式便于本地刷新与后续 GitHub Pages 部署
    */
