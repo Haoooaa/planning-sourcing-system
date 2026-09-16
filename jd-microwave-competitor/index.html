@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>京东微波炉竞品分析 · 杨昀昊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --teal: #1f5c57;
+      --teal-soft: #2a7a73;
+      --ink: #1a2422;
+      --muted: #5a6b68;
+      --bg: #f3f7f6;
+      --paper: #ffffff;
+      --line: rgba(31, 92, 87, 0.14);
+      --shadow: 0 16px 36px rgba(26, 36, 34, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1000px 480px at 0% -20%, rgba(31, 92, 87, 0.1), transparent 55%),
+        linear-gradient(180deg, #eef5f3 0%, var(--bg) 40%, #e8f0ee 100%);
+    }
+
+    .page {
+      width: min(900px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2.25rem 0 3.5rem;
+    }
+
+    .nav {
+      margin-bottom: 1.75rem;
+    }
+
+    .nav a {
+      color: var(--teal-soft);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .nav a:hover { text-decoration: underline; }
+
+    .brand {
+      margin: 0 0 0.35rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    h1 {
+      margin: 0 0 0.65rem;
+      font-size: clamp(1.65rem, 4vw, 2.15rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .context {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 40rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .actions a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--teal);
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .actions a.primary {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fff;
+    }
+
+    .actions a:hover {
+      border-color: rgba(31, 92, 87, 0.4);
+    }
+
+    .actions a.primary:hover {
+      background: var(--teal-soft);
+      border-color: var(--teal-soft);
+    }
+
+    .covers {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.15rem 1.3rem 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .covers h2 {
+      margin: 0 0 0.7rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--teal);
+    }
+
+    .covers ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .viewer {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .viewer iframe {
+      display: block;
+      width: 100%;
+      height: min(78vh, 1100px);
+      border: 0;
+      background: #fafafa;
+    }
+
+    .note {
+      margin: 0.85rem 1.1rem 1.1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav"><a href="https://haoooaa.github.io/planning-sourcing-system/">← 备货中台演示</a></nav>
+
+    <p class="brand">杨昀昊 · Portfolio</p>
+    <h1>京东台式微波炉竞品口碑与用户研究</h1>
+    <p class="context">
+      美的技术考核 · 基于京东评论的竞品品质与用户口碑分析汇报。下方可在线预览 PDF 演示稿，也可下载 PDF / PPTX 与完整分析报告。
+    </p>
+
+    <div class="actions">
+      <a class="primary" href="./deck.pdf" download>下载演示 PDF</a>
+      <a href="./deck.pptx" download>下载 PPTX</a>
+      <a href="./report.pdf" download>下载分析报告 PDF</a>
+    </div>
+
+    <section class="covers" aria-label="Scope">
+      <h2>本作品覆盖</h2>
+      <ul>
+        <li>京东台式微波炉头部竞品口碑与评价结构梳理</li>
+        <li>用户痛点、品质关注点与品类机会洞察</li>
+        <li>面向美的技术考核的竞品分析汇报结论与建议</li>
+      </ul>
+    </section>
+
+    <section class="viewer" aria-label="Deck viewer">
+      <iframe
+        title="京东微波炉竞品分析演示稿"
+        src="./deck.pdf#view=FitH"
+        type="application/pdf"
+      ></iframe>
+      <p class="note">
+        若浏览器无法内嵌预览，请直接
+        <a href="./deck.pdf" target="_blank" rel="noopener">打开 PDF</a>
+        或使用上方下载链接。
+      </p>
+    </section>
+
+    <footer>美的技术考核 · 竞品分析 · 杨昀昊</footer>
+  </main>
+</body>
+</html>
