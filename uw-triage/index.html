@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>车险核保分流助手 · 杨昀昊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#123; --muted:#5a6a78; --line:#d7e3ef; --blue:#0072bc; --navy:#003d6b; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:"Noto Sans SC","DM Sans",sans-serif; color:var(--ink); background:#f3f6fa; }
+    .page { width:min(980px, calc(100% - 2rem)); margin:0 auto; padding:1.5rem 0 3rem; }
+    a { color:var(--blue); }
+    .nav { margin-bottom:1rem; font-size:.92rem; }
+    .hero { background:linear-gradient(120deg,#003d6b,#0072bc 62%,#4aa3d9); color:#fff; border-radius:18px; padding:22px 26px; }
+    .hero h1 { margin:6px 0 4px; font-size:28px; }
+    .hero p { margin:0; opacity:.92; }
+    .badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .badge { border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:4px 10px; font-size:12px; }
+    .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:14px 0; }
+    .kpi, .panel { background:#fff; border:1px solid var(--line); border-radius:14px; }
+    .kpi { padding:12px 14px; }
+    .kpi .l { font-size:12px; color:var(--muted); }
+    .kpi .v { font-size:20px; font-weight:900; color:var(--navy); margin-top:4px; }
+    .grid { display:grid; grid-template-columns:1.05fr .95fr; gap:14px; }
+    .panel { padding:16px 16px 12px; }
+    .panel h2 { margin:0 0 12px; font-size:15px; color:var(--navy); }
+    .cases { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+    button.case { border:1px solid #cfe3f3; background:#eef6fb; border-radius:999px; padding:8px 12px; font-weight:700; cursor:pointer; font-family:inherit; }
+    button.case.on { background:var(--blue); color:#fff; border-color:var(--blue); }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { text-align:left; padding:6px 4px; border-bottom:1px solid #eef3f8; }
+    .score { font-size:48px; font-weight:900; color:var(--navy); line-height:1; }
+    .chip { display:inline-block; color:#fff; font-weight:800; border-radius:999px; padding:8px 14px; }
+    .green { background:#1f9d63; } .orange { background:#e08a00; } .red { background:#d64545; }
+    .suggest { margin-top:12px; border:1px solid var(--line); border-radius:14px; padding:14px; }
+    .suggest.green { border-left:5px solid #1f9d63; }
+    .suggest.orange { border-left:5px solid #e08a00; }
+    .suggest.red { border-left:5px solid #d64545; }
+    .suggest h3 { margin:0 0 6px; color:var(--navy); }
+    .suggest p, .gate, li { color:#445566; line-height:1.6; font-size:13px; }
+    .meter { height:10px; background:#e5eef6; border-radius:99px; overflow:hidden; margin-top:8px; }
+    .meter span { display:block; height:100%; background:linear-gradient(90deg,#4aa3d9,#0072bc); }
+    .gate { margin-top:12px; padding:12px; border-radius:12px; background:#fff8f0; border:1px solid #f0d2a8; color:#7a4b00; }
+    label.confirm { display:flex; gap:8px; align-items:flex-start; margin-top:12px; font-size:13px; }
+    .audit { display:none; margin-top:10px; background:#0f2740; color:#d7e9ff; border-radius:12px; padding:12px; font-family:Consolas,monospace; font-size:12px; }
+    footer { margin-top:1.5rem; color:var(--muted); font-size:.88rem; }
+    @media (max-width:800px) { .kpis, .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav"><a href="../">← 杨昀昊 · Portfolio</a></nav>
+    <header class="hero">
+      <div>UW TRIAGE WORKBENCH</div>
+      <h1>车险核保分流助手</h1>
+      <p>公开车险保单数据训练 · 风险分层建议 · 核保人确认后留痕</p>
+      <div class="badges">
+        <span class="badge">OpenML 41214</span>
+        <span class="badge">LightGBM</span>
+        <span class="badge">人在环</span>
+        <span class="badge">非生产承保系统</span>
+      </div>
+    </header>
+    <section class="kpis">
+      <div class="kpi"><div class="l">训练样本</div><div class="v">250,000</div></div>
+      <div class="kpi"><div class="l">测试 AUC</div><div class="v">0.700</div></div>
+      <div class="kpi"><div class="l">样本出险率</div><div class="v">5.0%</div></div>
+      <div class="kpi"><div class="l">分流阈值</div><div class="v">0.37 / 0.55</div></div>
+    </section>
+    <section class="grid">
+      <div class="panel">
+        <h2>投保画像</h2>
+        <div class="cases" id="cases"></div>
+        <table>
+          <thead><tr><th>字段</th><th>含义</th><th>取值</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h2>分流建议</h2>
+        <div class="score" id="score">0.033</div>
+        <div style="color:#5a6a78;font-size:12px">出险风险概率 · 模型分</div>
+        <div class="meter"><span id="bar" style="width:3%"></span></div>
+        <div style="margin-top:12px"><span class="chip green" id="chip">低风险</span></div>
+        <div class="suggest green" id="suggest">
+          <h3 id="title">建议进入自核通道</h3>
+          <p id="desc"></p>
+        </div>
+        <ul id="checks"></ul>
+        <div class="gate"><b>责任边界：</b>只输出风险分层与分流建议。是否承保、加费、除外或拒保，由有权核保人确认。系统不形成终局决定。</div>
+        <label class="confirm"><input type="checkbox" id="ok" /> 我已理解：以上仅为分流建议，承保责任由人确认</label>
+        <div class="audit" id="audit"></div>
+      </div>
+    </section>
+    <footer>数据：freMTPL2freq（OpenML 41214）· 杨昀昊</footer>
+  </main>
+  <script>
+    const CASES = {
+      "低风险": { score: 0.033, band: "低风险", cls: "green", title: "建议进入自核通道", desc: "风险分落在较低区间。建议进入自动核保规则校验；未命中例外规则时可快速出单。最终以自核规则与有权人确认为准。", checks: ["核对必填字段", "跑黑灰名单与例外规则", "通过后出单并留痕"], row: [["Area","地区类型","C"],["VehBrand","车辆品牌","B1"],["VehGas","燃料","Regular"],["Region","行政区","R23"],["VehPower","功率档","7"],["VehAge","车龄","27"],["DrivAge","驾驶员年龄","34"],["BonusMalus","无赔优待","50"],["Density","人口密度","165"],["Exposure","承保暴露","0.08"]] },
+      "中风险": { score: 0.420, band: "中风险", cls: "orange", title: "建议转人工核保", desc: "存在需专业判断的风险点。建议进入人核队列，由核保人核对承保条件、加费或除外。助手只提供分流，不给出承保结论。", checks: ["复核无赔优待、车龄与地区组合", "必要时补充资料", "人核结论回写"], row: [["Area","地区类型","A"],["VehBrand","车辆品牌","B1"],["VehGas","燃料","Diesel"],["Region","行政区","R24"],["VehPower","功率档","8"],["VehAge","车龄","15"],["DrivAge","驾驶员年龄","54"],["BonusMalus","无赔优待","50"],["Density","人口密度","8"],["Exposure","承保暴露","1.00"]] },
+      "高风险": { score: 0.911, band: "高风险", cls: "red", title: "建议升级复核", desc: "风险分偏高。建议优先人工复核，必要时升级审批。是否拒保或附条件承保，必须由有权核保人作出。", checks: ["升级有权核保人", "记录风险因子与沟通口径", "禁止系统自动拒保"], row: [["Area","地区类型","D"],["VehBrand","车辆品牌","B1"],["VehGas","燃料","Diesel"],["Region","行政区","R11"],["VehPower","功率档","6"],["VehAge","车龄","13"],["DrivAge","驾驶员年龄","19"],["BonusMalus","无赔优待","125"],["Density","人口密度","906"],["Exposure","承保暴露","1.00"]] }
+    };
+    const names = Object.keys(CASES);
+    let current = names[0];
+    const box = document.getElementById("cases");
+    names.forEach(name => {
+      const b = document.createElement("button");
+      b.className = "case" + (name === current ? " on" : "");
+      b.textContent = name;
+      b.onclick = () => { current = name; render(); };
+      box.appendChild(b);
+    });
+    function render() {
+      const c = CASES[current];
+      document.querySelectorAll("button.case").forEach(b => b.classList.toggle("on", b.textContent === current));
+      document.getElementById("rows").innerHTML = c.row.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("");
+      document.getElementById("score").textContent = c.score.toFixed(3);
+      document.getElementById("bar").style.width = Math.min(100, c.score * 100) + "%";
+      const chip = document.getElementById("chip");
+      chip.className = "chip " + c.cls;
+      chip.textContent = c.band;
+      const sug = document.getElementById("suggest");
+      sug.className = "suggest " + c.cls;
+      document.getElementById("title").textContent = c.title;
+      document.getElementById("desc").textContent = c.desc;
+      document.getElementById("checks").innerHTML = c.checks.map(x => `<li>${x}</li>`).join("");
+      document.getElementById("ok").checked = false;
+      document.getElementById("audit").style.display = "none";
+    }
+    document.getElementById("ok").onchange = (e) => {
+      const c = CASES[current];
+      const audit = document.getElementById("audit");
+      if (!e.target.checked) { audit.style.display = "none"; return; }
+      const ts = new Date().toISOString().slice(0, 19).replace("T", " ");
+      audit.style.display = "block";
+      audit.textContent = `[${ts}] SCORE=${c.score.toFixed(4)} BAND=${c.band}\nSTATUS=PENDING_HUMAN_DECISION\nNOTE=suggestion_only; no bind decision`;
+    };
+    render();
+  </script>
+</body>
+</html>
